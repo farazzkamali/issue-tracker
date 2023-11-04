@@ -7,6 +7,7 @@ import {AiFillBug} from 'react-icons/ai'
 import classnames from 'classnames'
 import {useSession} from 'next-auth/react'
 import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes'
+import Spinner from './components/Spinner'
 
 const NavBar = () => {
 
@@ -57,7 +58,7 @@ const AuthStatus = () =>{
     const {status, data:session} = useSession()
 
     if (status==="loading") {
-        return null
+        return <Spinner/>
     }
     if (status==="unauthenticated") {
         return <Link href="/api/auth/signin" className='nav-link'>Login</Link>    
