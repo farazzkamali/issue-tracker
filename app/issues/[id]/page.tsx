@@ -1,11 +1,16 @@
+// 'use client'
+
 import prisma from '@/prisma/client'
 import { Box, Flex, Grid } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import EditIssueButton from './EditIssueButton'
 import IssueDetails from './IssueDetails'
 import DeleteIssueButton from './DeleteIssueButton'
-import { getServerSession } from 'next-auth'
+
 import authOptions from '@/app/auth/authOptions'
+import AsigneeSelect from './AsigneeSelect'
+import { getServerSession } from 'next-auth'
+
 
 interface Props{
     params: {id:string}
@@ -29,6 +34,7 @@ const IssueDetailPage = async ({params}:Props) => {
         {session &&(
         <Box>
             <Flex direction="column" gap="4">
+                <AsigneeSelect />
                 <EditIssueButton issueId={issue.id}/>
                 <DeleteIssueButton issueId={issue.id} />
             </Flex>
