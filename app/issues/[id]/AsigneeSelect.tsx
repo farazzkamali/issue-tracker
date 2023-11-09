@@ -23,12 +23,15 @@ const AsigneeSelect = ({issue}:{issue:Issue}) => {
   if (isLoading) {
     return <Spinner/>
   }
+
+  const assignIssue = (userId:string)=>{
+    axios
+      .patch(`/api/issues/${issue.id}`,{assignedToUserId:userId || null})
+      .catch(()=>toast.error('Changes could not be saved.'))}
+
   return (
     <>
-      <Select.Root onValueChange={(userId)=>{
-        axios
-          .patch(`/api/issues/${issue.id}`,{assignedToUserId:userId || null})
-          .catch(()=>toast.error('Changes could not be saved.'))}} 
+      <Select.Root onValueChange={assignIssue} 
           defaultValue={issue.assignedToUserId || ""}>
           <Select.Trigger placeholder='Assign...'/>
           <Select.Content>
